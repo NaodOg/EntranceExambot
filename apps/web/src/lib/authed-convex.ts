@@ -18,6 +18,20 @@ import { useTelegramWebApp } from "@/hooks/useTelegramWebApp";
  * real time, so a tampered device clock cannot buy extra quota or keep an
  * expired streak or Pro plan alive.
  */
+/**
+ * Buckets the client clock to the minute.
+ *
+ * This must be stable across renders: `useQuery` treats any change in args as a
+ * different query, so a raw `Date.now()` would make every render a cache miss,
+ * refetch forever, and leave callers stuck on `undefined`. Bucketing keeps the
+ * args identical for the whole minute so Convex can memoise the response. The
+ * server still clamps the value (convex/lib/now.ts), so this costs at most 60s
+ * of precision on expiry checks.
+ */
+function bucketedNowMs(): number {
+  return Math.floor(Date.now() / 60_000) * 60_000;
+}
+
 function withRuntime(args: unknown, initData: string): unknown {
   if (!args || typeof args !== "object" || !("telegramId" in args) || !initData) {
     return args;
@@ -25,7 +39,7 @@ function withRuntime(args: unknown, initData: string): unknown {
   return {
     ...(args as Record<string, unknown>),
     initData,
-    nowMs: Date.now(),
+    nowMs: bucketedNowMs(),
   };
 }
 
@@ -34,7 +48,7 @@ function withInitDataAndClock(args: unknown, initData: string): unknown {
   return {
     ...(args as Record<string, unknown>),
     initData,
-    nowMs: Date.now(),
+    nowMs: bucketedNowMs(),
   };
 }
 
