@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+.next
+.turbo
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# Convex
+.convex
+
+# Logs / OS
+*.log
+.DS_Store
+__pycache__/
+data/sourced-exams/.cache/
+
+# Local exam source files (docx/pdf from Telegram, not versioned)
+exams/
+
+# Local exam data exports and import/parsing tooling (not versioned)
+/data/
+/scripts/
+
+# Vercel
+.vercel
