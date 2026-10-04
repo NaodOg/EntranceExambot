@@ -26,3 +26,7 @@ exams/
 
 # Vercel
 .vercel
+
+# Any env file except the committed template
+.env*
+!.env.example
