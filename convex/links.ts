@@ -301,6 +301,7 @@ export const recordStart = mutation({
     code: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);

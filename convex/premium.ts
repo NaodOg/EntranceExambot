@@ -52,6 +52,7 @@ export const submitRequest = mutation({
     proofFileId: v.optional(v.id("_storage")),
     kind: v.optional(v.union(v.literal("self"), v.literal("gift"))),
     giftRecipient: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.id("premiumRequests"),
   handler: async (ctx, args) => {
@@ -282,6 +283,7 @@ export const getMyRequest = query({
     telegramId: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);

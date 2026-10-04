@@ -105,6 +105,7 @@ export const getOrCreateFromTelegram = mutation({
     username: v.optional(v.string()),
     firstName: v.optional(v.string()),
     language: v.optional(languageValues),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -209,6 +210,7 @@ export const updateProfile = mutation({
     botProof: v.optional(v.string()),
     language: v.optional(languageValues),
     trackSlug: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -253,6 +255,7 @@ export const updatePreferences = mutation({
     instantFeedback: v.optional(v.boolean()),
     onboardingComplete: v.optional(v.boolean()),
     firstName: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);

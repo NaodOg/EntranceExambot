@@ -128,6 +128,7 @@ export const getMyDuelStats = query({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     todayStartMs: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     totalDuels: v.number(),
@@ -215,6 +216,7 @@ export const listMyDuels = query({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     limit: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     items: v.array(duelListItem),
@@ -309,6 +311,7 @@ export const createDuel = mutation({
     questionCount: v.number(),
     maxPlayers: v.number(),
     source: v.optional(questionSourceValidator),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     duelId: v.id("duels"),
@@ -404,6 +407,7 @@ export const joinDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     language: v.optional(v.union(v.literal("en"), v.literal("am"))),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     joined: v.boolean(),
@@ -484,6 +488,7 @@ export const getDuel = query({
     telegramId: v.optional(v.string()),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const duel = await ctx.db
@@ -597,6 +602,7 @@ export const getDuelQuestions = query({
     telegramId: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -667,6 +673,7 @@ export const submitDuelAttempt = mutation({
       }),
     ),
     durationSec: v.number(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     score: v.number(),

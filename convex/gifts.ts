@@ -33,6 +33,7 @@ export const listMine = query({
     telegramId: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.array(giftRow),
   handler: async (ctx, args) => {
@@ -100,6 +101,7 @@ export const redeem = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     code: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     ok: v.boolean(),

@@ -37,6 +37,7 @@ const viewerArgs = {
   telegramId: v.optional(v.string()),
   initData: v.optional(v.string()),
   botProof: v.optional(v.string()),
+  nowMs: v.optional(v.number()),
 };
 
 /** Published subjects inside a track, in catalogue order. */
@@ -364,6 +365,7 @@ export const prepareSitting = mutation({
     examId: v.optional(v.id("exams")),
     mode: v.union(v.literal("quick"), v.literal("exam")),
     questionCount: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -851,6 +853,7 @@ export const submitAttempt = mutation({
     durationSec: v.number(),
     bonusXp: v.optional(v.number()),
     maxCombo: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -864,6 +867,7 @@ export const getAttemptReview = query({
     telegramId: v.optional(v.string()),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const attempt = await ctx.db.get(args.attemptId);
@@ -935,6 +939,7 @@ export const listMyAttempts = query({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     limit: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     items: v.array(attemptListItem),
@@ -1001,6 +1006,7 @@ export const toggleBookmark = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     questionId: v.id("questions"),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -1037,6 +1043,7 @@ export const reportQuestion = mutation({
     botProof: v.optional(v.string()),
     questionId: v.id("questions"),
     reason: v.string(),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);
@@ -1186,6 +1193,7 @@ export const getDailyQuota = query({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     todayStartMs: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const telegramId = await resolveTelegramId(args);

@@ -13,6 +13,7 @@ const actorArgs = {
   telegramId: v.optional(v.string()),
   initData: v.optional(v.string()),
   botProof: v.optional(v.string()),
+  nowMs: v.optional(v.number()),
 };
 
 /** Marks a question is worth, defaulting to 1 when unset. */

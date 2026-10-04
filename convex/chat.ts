@@ -199,6 +199,7 @@ export const startSession = mutation({
     source: v.optional(questionSourceValidator),
     force: v.optional(v.boolean()),
     dayIndex: v.optional(v.number()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -411,6 +412,7 @@ export const getQuestionPayload = query({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -463,6 +465,7 @@ export const submitAnswer = mutation({
     botProof: v.optional(v.string()),
     token: v.string(),
     selectedKey: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -548,6 +551,7 @@ export const advanceSession = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -593,6 +597,7 @@ export const skipQuestion = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -639,6 +644,7 @@ export const completeSession = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -718,6 +724,7 @@ export const abandonSession = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -742,6 +749,7 @@ export const setIntent = mutation({
     botProof: v.optional(v.string()),
     kind: v.literal("pro_photo"),
     transactionRef: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -768,6 +776,7 @@ export const getIntent = query({
     telegramId: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(
     v.object({
@@ -793,6 +802,7 @@ export const clearIntent = mutation({
     telegramId: v.string(),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {

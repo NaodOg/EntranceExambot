@@ -370,6 +370,7 @@ export const createSetup = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     chatId: v.number(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({ token: v.string() }),
   handler: async (ctx, args) => {
@@ -434,6 +435,7 @@ export const setSetupSubject = mutation({
     botProof: v.optional(v.string()),
     token: v.string(),
     subjectSlug: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -452,6 +454,7 @@ export const setSetupQuestions = mutation({
     botProof: v.optional(v.string()),
     token: v.string(),
     questionCount: v.number(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -470,6 +473,7 @@ export const setSetupPlayers = mutation({
     botProof: v.optional(v.string()),
     token: v.string(),
     maxPlayers: v.number(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -487,6 +491,7 @@ export const cancelSetup = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -507,6 +512,7 @@ export const createGroupDuel = mutation({
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
     token: v.string(),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(duelView, v.null()),
   handler: async (ctx, args) => {
@@ -574,6 +580,7 @@ export const getGroupDuel = query({
     telegramId: v.optional(v.string()),
     initData: v.optional(v.string()),
     botProof: v.optional(v.string()),
+    nowMs: v.optional(v.number()),
   },
   returns: v.union(duelView, v.null()),
   handler: async (ctx, args) => {
@@ -598,6 +605,7 @@ export const joinGroupDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: duelView,
   handler: async (ctx, args) => {
@@ -643,6 +651,7 @@ export const startGroupDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: roundView,
   handler: async (ctx, args) => {
@@ -683,6 +692,7 @@ export const answerGroupDuel = mutation({
     index: v.number(),
     key: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: v.object({
     outcome: v.union(
@@ -768,6 +778,7 @@ export const revealGroupDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: roundView,
   handler: async (ctx, args) => {
@@ -793,6 +804,7 @@ export const advanceGroupDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: roundView,
   handler: async (ctx, args) => {
@@ -856,6 +868,7 @@ export const cancelGroupDuel = mutation({
     botProof: v.optional(v.string()),
     code: v.string(),
     ...chatArg,
+    nowMs: v.optional(v.number()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
